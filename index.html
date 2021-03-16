@@ -28,29 +28,33 @@
         <div id="test2"></div>
         <div class="jumbotron text-center bg-primary text-white">
             <h1>Information Your Browser Has About You</h1>
-            <p>This web application demonstrates a few pieces of information that your browser knows about you. All of this information can be potentially accessed by malicious sites without your permission.</p> 
+            <p>This web application shows a few pieces of information that your browser knows about you. Most of this data is used to personalize your browsing experience. A website knowing just one piece of information – such as your browser or timezone – may not be harmful. However, this entire collection of data can be used to monitor your browsing habits, create browser fingerprints, and other malicious activities.</p> 
         </div>
         <div class="container">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;Basic Information</h4>
                     <h5>Software</h5>
-                    <p id="os" class="text-secondary"></p>
-                    <p id="browser" class="text-secondary"><b>Browser (via user agent): </b></p>
-                    <p id="browserDuck" class="text-secondary"><b>Browser <a href="https://en.wikipedia.org/wiki/Duck_typing">(via ducktyping)</a>: </b></p>
-                    <p id="plugins" class="text-secondary"><b>Plugins installed: </b></p>
+                    <p id="os"></p>
+                    <p id="browser"><b>Browser (via user agent): </b></p>
+                    <p id="browserDuck"><b>Browser <a href="https://en.wikipedia.org/wiki/Duck_typing">(via duck typing)</a>: </b></p>
+                    <p id="plugins"><b>Plugins installed: </b></p>
+                    <p id="cookies"><b>Cookies enabled: </b><br></p>
+                    <p id="dnc"><b>Do Not Track Request enabled: </b><br></p>
+                    
                     <h5>Hardware</h5>
-                    <p id="cpu" class="text-secondary"><b>CPU info: </b></p>
-                    <p id="battery" class="text-secondary"><b>Battery info: </b><br></p>
+                    <p id="cpu"><b>CPU info: </b></p>
+                    <p id="gpu"><b>GPU info/WebGL renderer: </b></p>
+                    <p id="battery"><b>Battery info: </b><br></p>
                     
                     <div class="card bg-light text-black">
                         <div class="card-body">
                             <h5>How is this possible?</h5>
-                            <p class="text-secondary">Developers can use the <code>navigator.userAgent</code> JavaScript property to list information about the user's browser, OS, etc.</p>
-                            <p class="text-secondary">Duck typing is a technique used to identify user information based on the duck test (if it walks, looks, and sounds like a duck... then it IS a duck). Threat actors can spoof their user agent, duck typing combats this by identify browsers based on known quirks they have.</p>
-                            <p class="text-secondary">The <code>navigator.getBattery()</code> property can be used to view a device's battery percentage. This is an deprecated feature removed from most browsers due to security concerns.</p>
+                            <p>Developers can use the <code>navigator.userAgent</code> JavaScript property to list information about the user's browser, OS, etc.</p>
+                            <p>Duck typing is a technique used to identify user information based on the duck test (if it walks, looks, and sounds like a duck... then it IS a duck). Users can spoof their user agent to hide their identity. However, duck typing combats this by identifing browsers based on known quirks they have.</p>
+                            <p>The <code>navigator.getBattery()</code> property can be used to view a device's battery percentage. Some malicious actors haved used it to <a href="https://www.theguardian.com/technology/2016/aug/02/battery-status-indicators-tracking-online">track your online activity</a>. This is a deprecated feature that has been removed from most browsers due to security concerns.</p>
                             <h5>Mitigation techniques</h5>
-                            <p class="text-secondary">User agent information can be hidden by browser extensions such as <a href="https://www.google.com/search?q=noscript">NoScript</a>.</p>
+                            <p>User agent information can be hidden by browser extensions such as <a href="https://www.google.com/search?q=noscript">NoScript</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -59,18 +63,18 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;&nbsp;Network Information</h4>
-                    <p id="ip" class="text-secondary"><b>Public IP Address: </b></p>
-                    <p id="conSpeed" class="text-secondary"><b>Downlink speed: </b></p>
-                    <p id="conType" class="text-secondary"><b>Connection type: </b></p>
+                    <p id="ip"><b>Public IP Address: </b></p>
+                    <p id="conSpeed"><b>Downlink speed: </b></p>
+                    <p id="conType"><b>Connection type: </b></p>
                     
                     <div class="card bg-light text-black">
                         <div class="card-body">
                             <h5>How is this possible?</h5>
-                            <p class="text-secondary">Cloudflare can be used to get a user's public IP address. Your public IP address is provided by your router/internet service provider and connects everyone in your local area network (household or office) to the internet. It may look something like this: <code>92.123.50.225</code>. A private IP address is used for communications between devices within your own network. It is not recognized on the internet and looks something like <code>192.168.1.240</code>.</p>
+                            <p>Cloudflare can be used to get a user's public IP address. Your public IP address is provided by your router/internet service provider and connects everyone in your local area network (household or office) to the internet. It may look something like this: <code>92.123.50.225</code>. A private IP address is used for communications between devices within your own network. It is not recognized on the internet and looks something like this: <code>192.168.1.240</code>.</p>
                             <p>There are browser methods such as <code>navigator.connection</code> that gives websites access to this information.</p>
                             <h5>Mitigation techniques</h5>
-                            <p class="text-secondary">Use a VPN service. VPNs allow users to use unsecured public networks like a secure private network by encrypting all data between the remote and client device.</p>
-                            <p class="text-secondary">Use the <a href="https://www.google.com/search?q=tor%20project">Tor browser</a>. This browser allows internet users to browse anonymously online and keep their activities hidden from websites, ISPs, and advertisers.</p>
+                            <p>Use a VPN service. VPNs allow users to use unsecured public networks like a secure private network by encrypting all data between the remote and client device.</p>
+                            <p>Use the <a href="https://www.google.com/search?q=tor%20project">Tor browser</a>. This browser allows internet users to browse anonymously online and keep their activities hidden from websites, ISPs, and advertisers.</p>
                         </div>
                     </div>
                 </div>

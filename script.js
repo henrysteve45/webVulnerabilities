@@ -59,9 +59,42 @@
         }
         $("#plugins").append(txt);
     }
+/*cookies*/
+if (window.navigator.cookeEnabled == true) {
+    $("#cookies").append("True");
+} else {
+    $("#cookies").append("False");
+}
+/*dnc*/
+if (window.navigator.doNotTrack == true) {
+    $("#dnc").append("True");
+} else {
+    $("#dnc").append("False");
+}
 
 /*CPU info*/
-    $("#cpu").append(navigator.hardwareConcurrency + " core(s)");
+    if (navigator.hardwareConcurrency > 0) {
+        $("#cpu").append(navigator.hardwareConcurrency + " core(s)");
+    } else {
+        $("#cpu").append("No information available.");
+    }
+/*GPU info*/
+    function getVideoCardInfo() {
+        const gl = document.createElement('canvas').getContext('webgl');
+        if (!gl) {
+            return {
+                error: "no webgl",
+            };
+        }
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        return debugInfo ? {
+            vendor: gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL),
+            renderer:  gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL),
+        } : {
+            error: "no WEBGL_debug_renderer_info",
+        };
+    }
+    $("#gpu").append(getVideoCardInfo().renderer);
 
 /*Battery info*/
 try {
@@ -99,3 +132,5 @@ text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
 /*connection*/
 $("#conSpeed").append(navigator.connection.downlink + " Mbits per second");
 $("#conType").append(navigator.connection.effectiveType);
+
+/**/
