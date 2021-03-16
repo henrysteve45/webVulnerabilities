@@ -18,7 +18,7 @@
     else if(navigator.userAgent.indexOf("Safari") != -1){$("#browser").append("Safari");}
     else if(navigator.userAgent.indexOf("Firefox") != -1 ) {$("#browser").append("Mozilla Firefox");}
     else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) {$("#browser").append("Microsoft Internet Explorer");}
-    else {$("#browser").append("Unknown browser");}
+    else {$("#browser").append("<span class='text-danger'>Unknown browser</span>");}
 
 /*Browser via ducktyping*/
     // Opera 8.0+
@@ -45,4 +45,17 @@
     else if (isIE == true) {$("#browserDuck").append("Microsoft Internet Explorer");}
     else if (isEdge == true) {$("#browserDuck").append("Microsoft Edge");}
     else if (isChrome == false) {$("#browserDuck").append("Google Chrome");}
-    else {$("#browserDuck").append("Unknown browser");}
+    else {$("#browserDuck").append("<span class='text-danger'>Unknown browser</span>");}
+
+/*Plugins installed*/
+var x = navigator.plugins.length; 
+var txt = "<br>";
+if (x == 0) {
+    $("#plugins").append("<span class='text-danger'>No plugins available</span>");
+} else {
+    for(var i=0;i<x;i++)
+    {
+      txt+=navigator.plugins[i].name + "<br>"; 
+    }
+    $("#plugins").append(txt);
+}
