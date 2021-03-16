@@ -34,10 +34,45 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;Basic Information</h4>
-                    <p id="os"></p>
-                    <p id="browser"><b>Browser (via user agent): </b></p>
-                    <p id="browserDuck"><b>Browser <a href="https://en.wikipedia.org/wiki/Duck_typing">(via ducktyping)</a>: </b></p>
-                    <p id="plugins"><b>Plugins installed: </b></p>
+                    <h5>Software</h5>
+                    <p id="os" class="text-secondary"></p>
+                    <p id="browser" class="text-secondary"><b>Browser (via user agent): </b></p>
+                    <p id="browserDuck" class="text-secondary"><b>Browser <a href="https://en.wikipedia.org/wiki/Duck_typing">(via ducktyping)</a>: </b></p>
+                    <p id="plugins" class="text-secondary"><b>Plugins installed: </b></p>
+                    <h5>Hardware</h5>
+                    <p id="cpu" class="text-secondary"><b>CPU info: </b></p>
+                    <p id="battery" class="text-secondary"><b>Battery info: </b><br></p>
+                    
+                    <div class="card bg-light text-black">
+                        <div class="card-body">
+                            <h5>How is this possible?</h5>
+                            <p class="text-secondary">Developers can use the <code>navigator.userAgent</code> JavaScript property to list information about the user's browser, OS, etc.</p>
+                            <p class="text-secondary">Duck typing is a technique used to identify user information based on the duck test (if it walks, looks, and sounds like a duck... then it IS a duck). Threat actors can spoof their user agent, duck typing combats this by identify browsers based on known quirks they have.</p>
+                            <p class="text-secondary">The <code>navigator.getBattery()</code> property can be used to view a device's battery percentage. This is an deprecated feature removed from most browsers due to security concerns.</p>
+                            <h5>Mitigation techniques</h5>
+                            <p class="text-secondary">User agent information can be hidden by browser extensions such as <a href="https://www.google.com/search?q=noscript">NoScript</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;&nbsp;Network Information</h4>
+                    <p id="ip" class="text-secondary"><b>Public IP Address: </b></p>
+                    <p id="conSpeed" class="text-secondary"><b>Downlink speed: </b></p>
+                    <p id="conType" class="text-secondary"><b>Connection type: </b></p>
+                    
+                    <div class="card bg-light text-black">
+                        <div class="card-body">
+                            <h5>How is this possible?</h5>
+                            <p class="text-secondary">Cloudflare can be used to get a user's public IP address. Your public IP address is provided by your router/internet service provider and connects everyone in your local area network (household or office) to the internet. It may look something like this: <code>92.123.50.225</code>. A private IP address is used for communications between devices within your own network. It is not recognized on the internet and looks something like <code>192.168.1.240</code>.</p>
+                            <p>There are browser methods such as <code>navigator.connection</code> that gives websites access to this information.</p>
+                            <h5>Mitigation techniques</h5>
+                            <p class="text-secondary">Use a VPN service. VPNs allow users to use unsecured public networks like a secure private network by encrypting all data between the remote and client device.</p>
+                            <p class="text-secondary">Use the <a href="https://www.google.com/search?q=tor%20project">Tor browser</a>. This browser allows internet users to browse anonymously online and keep their activities hidden from websites, ISPs, and advertisers.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
