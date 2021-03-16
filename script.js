@@ -3,7 +3,7 @@
     if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
     if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
     if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
-    if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+    if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux/Android";
     $("#os").append("<b>Operating System: </b>" + OSName + "<br>");
 
 /*Browser via User Agent*/
@@ -60,17 +60,17 @@
         $("#plugins").append(txt);
     }
 /*cookies*/
-if (window.navigator.cookeEnabled == true) {
-    $("#cookies").append("True");
-} else {
-    $("#cookies").append("False");
-}
+    if (window.navigator.cookeEnabled == true) {
+        $("#cookies").append("True");
+    } else {
+        $("#cookies").append("False");
+    }
 /*dnc*/
-if (window.navigator.doNotTrack == true) {
-    $("#dnc").append("True");
-} else {
-    $("#dnc").append("False");
-}
+    if (window.navigator.doNotTrack == true) {
+        $("#dnc").append("True");
+    } else {
+        $("#dnc").append("False");
+    }
 
 /*CPU info*/
     if (navigator.hardwareConcurrency > 0) {
@@ -95,23 +95,28 @@ if (window.navigator.doNotTrack == true) {
         };
     }
     $("#gpu").append(getVideoCardInfo().renderer);
+    $("#screenRes").append(screen.width + " x " + screen.height);
 
 /*Battery info*/
-try {
-    navigator.getBattery().then(function(battery) {
-        var level = Math.round(battery.level*100);
-        $("#battery").append("Your battery percentage is: " + level + "%.");
-        if (level == 100) {
-            $("#battery").append("<p>Your battery is fully charged!</p>");
-        } else if (level >= 75 && level <= 99) {
-            $("#battery").append("<p>Your device is almost fully charged!</p>");
-        } else if (level >= 30 && level < 75) {
-            $("#battery").append("<p>You will need to charge your device later.</p>");
-        } else if (level >= 15 && level < 30) {
-            $("#battery").append("<p>You need to charge your device.</p>");
-        } else {
-            $("#battery").append("<p>Your battery is critically low!</p>");
-        }
+    try {
+        navigator.getBattery().then(function(battery) {
+            var level = Math.round(battery.level*100);
+            $("#battery").append("Your battery percentage is: " + level + "%.");
+            if (battery.charging == false) {
+                if (level == 100) {
+                    $("#battery").append("<p>Your battery is fully charged!</p>");
+                } else if (level >= 75 && level <= 99) {
+                    $("#battery").append("<p>Your device is almost fully charged!</p>");
+                } else if (level >= 30 && level < 75) {
+                    $("#battery").append("<p>You will need to charge your device later.</p>");
+                } else if (level >= 15 && level < 30) {
+                    $("#battery").append("<p>You need to charge your device.</p>");
+                } else {
+                    $("#battery").append("<p>Your battery is critically low!</p>");
+                }
+            } else {
+                $("#battery").append("<p>Your device is currently charging.</p>");
+            }
     })
 } catch (error) {
     console.error(error);
@@ -119,18 +124,50 @@ try {
 }
 
 /*IP address*/
-function text(url) {
-  return fetch(url).then(res => res.text());
-}
+    function text(url) {
+        return fetch(url).then(res => res.text());
+    }
 
-text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
-  let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
-  let ip = data.match(ipRegex)[0];
-  $("#ip").append(ip);
-});
+    text('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
+        let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
+        let ip = data.match(ipRegex)[0];
+        $("#ip").append(ip);
+    });
 
 /*connection*/
-$("#conSpeed").append(navigator.connection.downlink + " Mbits per second");
-$("#conType").append(navigator.connection.effectiveType);
+    $("#conSpeed").append(navigator.connection.downlink + " Mbits per second");
+    $("#conType").append(navigator.connection.effectiveType);
 
-/**/
+/*accelerometer and gyro*/
+    let acl = new Accelerometer({frequency: 60});
+
+    acl.addEventListener('reading', () => {
+        $("#aclX").html("<b>X = </b>" + Math.round(acl.x * 10) / 10);
+        $("#aclY").html("<b>Y = </b>" + Math.round(acl.y * 10) / 10);
+        $("#aclZ").html("<b>Z = </b>" + Math.round(acl.z * 10) / 10);
+    });
+    acl.start();
+
+    let gyroscope = new Gyroscope({frequency: 60});
+
+    gyroscope.addEventListener('reading', e => {
+         $("#gyroX").html("<b>X = </b>" + Math.round(gyroscope.x * 10) / 10);
+        $("#gyroY").html("<b>Y = </b>" + Math.round(gyroscope.y * 10) / 10);
+        $("#gyroZ").html("<b>Z = </b>" + Math.round(gyroscope.z * 10) / 10);
+    });
+    gyroscope.start();
+/*geolocation*/
+    var x = document.getElementById("location");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}

@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="dist/jquery.device.detector.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-sm bg-light">
@@ -28,25 +27,29 @@
         <div id="test2"></div>
         <div class="jumbotron text-center bg-primary text-white">
             <h1>Information Your Browser Has About You</h1>
-            <p>This web application shows a few pieces of information that your browser knows about you. Most of this data is used to personalize your browsing experience. A website knowing just one piece of information – such as your browser or timezone – may not be harmful. However, this entire collection of data can be used to monitor your browsing habits, create browser fingerprints, and other malicious activities.</p> 
+            <p>This web application shows a few pieces of information that your browser knows about you. Most of this data is used to personalize your browsing experience. A website knowing just one piece of information – such as your browser or timezone – may not be harmful. However, this entire collection of data can be used to monitor your browsing habits, create browser fingerprints, and perform other malicious activities.</p> 
         </div>
         <div class="container">
+            <!--Basic info-->
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-info" aria-hidden="true"></i>&nbsp;&nbsp;Basic Information</h4>
                     <h5>Software</h5>
-                    <p id="os"></p>
-                    <p id="browser"><b>Browser (via user agent): </b></p>
-                    <p id="browserDuck"><b>Browser <a href="https://en.wikipedia.org/wiki/Duck_typing">(via duck typing)</a>: </b></p>
-                    <p id="plugins"><b>Plugins installed: </b></p>
-                    <p id="cookies"><b>Cookies enabled: </b><br></p>
-                    <p id="dnc"><b>Do Not Track Request enabled: </b><br></p>
-                    
+                    <div class="ml-4">
+                        <p id="os"></p>
+                        <p id="browser"><b>Browser (via user agent): </b></p>
+                        <p id="browserDuck"><b>Browser <a href="https://en.wikipedia.org/wiki/Duck_typing">(via duck typing)</a>: </b></p>
+                        <p id="plugins"><b>Plugins installed: </b></p>
+                        <p id="cookies"><b>Cookies enabled: </b><br></p>
+                        <p id="dnc"><b>Do Not Track Request enabled: </b><br></p>
+                    </div>
                     <h5>Hardware</h5>
-                    <p id="cpu"><b>CPU info: </b></p>
-                    <p id="gpu"><b>GPU info/WebGL renderer: </b></p>
-                    <p id="battery"><b>Battery info: </b><br></p>
-                    
+                    <div class="ml-4">
+                        <p id="cpu"><b>CPU info: </b></p>
+                        <p id="gpu"><b>GPU info/WebGL renderer: </b></p>
+                        <p id="battery"><b>Battery info: </b><br></p>
+                        <p id="screenRes"><b>Screen resolution: </b></p>
+                    </div>
                     <div class="card bg-light text-black">
                         <div class="card-body">
                             <h5>How is this possible?</h5>
@@ -60,13 +63,15 @@
                 </div>
             </div>
             <br>
+            <!--Network info-->
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;&nbsp;Network Information</h4>
-                    <p id="ip"><b>Public IP Address: </b></p>
-                    <p id="conSpeed"><b>Downlink speed: </b></p>
-                    <p id="conType"><b>Connection type: </b></p>
-                    
+                    <div class="ml-4">
+                        <p id="ip"><b>Public IP Address: </b></p>
+                        <p id="conSpeed"><b>Downlink speed: </b></p>
+                        <p id="conType"><b>Connection type: </b></p>
+                    </div>
                     <div class="card bg-light text-black">
                         <div class="card-body">
                             <h5>How is this possible?</h5>
@@ -75,6 +80,37 @@
                             <h5>Mitigation techniques</h5>
                             <p>Use a VPN service. VPNs allow users to use unsecured public networks like a secure private network by encrypting all data between the remote and client device.</p>
                             <p>Use the <a href="https://www.google.com/search?q=tor%20project">Tor browser</a>. This browser allows internet users to browse anonymously online and keep their activities hidden from websites, ISPs, and advertisers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!--Location info-->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title"><i class="fa fa-map" aria-hidden="true"></i>&nbsp;&nbsp;Location Information</h4>
+                    <h5>Device location</h5>
+                    <div class="ml-4">
+                        <p id="location"><span class="text-warning">Geolocation is not available.</span></p>
+                    </div>
+                    <h5>Accelerometer</h5>
+                    <div class="ml-4">
+                        <p id="aclX"><span class="text-warning">Accelerometer not found.</span></p>
+                        <p id="aclY"></p>
+                        <p id="aclZ"></p>
+                    </div>
+                    <h5>Gyroscrope</h5>
+                    <div class="ml-4">
+                        <p id="gyroX"><span class="text-warning">Accelerometer not found.</span></p>
+                        <p id="gyroY"></p>
+                        <p id="gyroZ"></p>
+                    </div>
+                    <div class="card bg-light text-black">
+                        <div class="card-body">
+                            <h5>How is this possible?</h5>
+                            <p>Accelerometers are used to see how fast your device is moving. One use case of this is to power off the device when it falls to prevent data loss.</p>
+                            <h5>Mitigation techniques</h5>
+                            <p></p>
                         </div>
                     </div>
                 </div>
