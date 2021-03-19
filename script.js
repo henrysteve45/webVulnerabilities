@@ -45,13 +45,13 @@
     else if (isIE == true) {$("#browserDuck").append("Microsoft Internet Explorer");}
     else if (isEdge == true) {$("#browserDuck").append("Microsoft Edge");}
     else if (isChrome == false) {$("#browserDuck").append("Google Chrome");}
-    else {$("#browserDuck").append("<span class='text-danger'>Unknown browser</span>");}
+    else {$("#browserDuck").append("<span class='text-info'>Unknown browser</span>");}
 
 /*Plugins installed*/
     var x = navigator.plugins.length; 
     var txt = "<br>";
     if (x == 0) {
-        $("#plugins").append("<span class='text-warning'>No plugins available or your plugins are hidden.</span>");
+        $("#plugins").append("<span class='text-danger'>No plugins available or your plugins are hidden.</span>");
     } else {
         for(var i=0;i<x;i++)
         {
@@ -161,11 +161,16 @@
 
     function handleOrientation(event) {
         var absolute = event.absolute;
-        var alpha    = event.alpha;
-        var beta     = event.beta;
-        var gamma    = event.gamma;
+        var alpha    = event.alpha; //turn your body around <- and ->
+        var beta     = event.beta; //flip deivce /\ and \/
+        var gamma    = event.gamma; //spin device <- and ->
 
-        $("#orientation").html("<br><img src='compass.png' width='256px' style='-webkit-transform:rotate("+alpha+"deg);'><br>");
+        $("#orientation").html("<br><img alt='compass' src='compass.png' width='256px' style='-webkit-transform:rotate("+alpha+"deg);-moz-transform:rotate("+alpha+"deg);-ms-transform:rotate("+alpha+"deg);-o-transform:rotate("+alpha+"deg);-transform:rotate("+alpha+"deg);'><br>");
+        if (beta < 45) {
+            $("#orientation").append("<br><p>Your device is probably laying down.</p>");
+        } else {
+            $("#orientation").append("<br><p>Your device is probably in your hands or sitting upright.</p>");
+        }
     }
 /*geolocation*/
     var x = document.getElementById("location");
