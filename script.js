@@ -151,23 +151,34 @@
     let gyroscope = new Gyroscope({frequency: 60});
 
     gyroscope.addEventListener('reading', e => {
-         $("#gyroX").html("<b>X = </b>" + Math.round(gyroscope.x * 10) / 10);
+        $("#gyroX").html("<b>X = </b>" + Math.round(gyroscope.x * 10) / 10);
         $("#gyroY").html("<b>Y = </b>" + Math.round(gyroscope.y * 10) / 10);
         $("#gyroZ").html("<b>Z = </b>" + Math.round(gyroscope.z * 10) / 10);
     });
     gyroscope.start();
+/*orientation*/
+    window.addEventListener("deviceorientation", handleOrientation, true);
+
+    function handleOrientation(event) {
+        var absolute = event.absolute;
+        var alpha    = event.alpha;
+        var beta     = event.beta;
+        var gamma    = event.gamma;
+
+        $("#orientation").html("<br><img src='compass.png' width='256px' style='-webkit-transform:rotate("+alpha+"deg);'><br>");
+    }
 /*geolocation*/
     var x = document.getElementById("location");
 
 function getLocation() {
-  if (navigator.geolocation) {
+    if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
+    } else { 
     x.innerHTML = "Geolocation is not supported by this browser.";
-  }
+    }
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
 }
