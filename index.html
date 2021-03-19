@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Information Your Browser Has About You</title>
+        <title>Browser Fingerprinting</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -11,23 +11,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-sm bg-light">
-            <ul class="navbar-nav">
-                <li class="logo">
-                    <img src="logo.png" height="48">
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-            </ul>
-        </nav>
         <div id="test2"></div>
         <div class="jumbotron text-center bg-primary text-white">
-            <h1>Information Your Browser Has About You</h1>
-            <p>This web application shows a few pieces of information that your browser knows about you. Most of this data is used to personalize your browsing experience. A website knowing just one piece of information – such as your browser or timezone – may not be harmful. However, this entire collection of data can be used to monitor your browsing habits, create browser fingerprints, and perform other malicious activities.</p> 
+            <h1>Data Used For Browser Fingerprinting</h1>
+            <p>This web application shows a few pieces of information that websites knows about you. Most of this data is used to personalize your browsing experience. A website knowing just a few pieces of information – such as your browser or timezone – may not be harmful. However, this entire collection of data can be used to monitor your browsing habits, create browser fingerprints, steal information, and perform other malicious activities.</p> 
+            <p>This data is not guaranteed to be accurate, especially if you use privacy-centered extensions and/or software.</p>
         </div>
         <div class="container">
             <!--Basic info-->
@@ -52,10 +40,11 @@
                     </div>
                     <div class="card bg-light text-black">
                         <div class="card-body">
-                            <h5>How is this possible?</h5>
+                            <h5>Explaination</h5>
                             <p>Developers can use the <code>navigator.userAgent</code> JavaScript property to list information about the user's browser, OS, etc.</p>
                             <p>Duck typing is a technique used to identify user information based on the duck test (if it walks, looks, and sounds like a duck... then it IS a duck). Users can spoof their user agent to hide their identity. However, duck typing combats this by identifing browsers based on known quirks they have.</p>
                             <p>The <code>navigator.getBattery()</code> property can be used to view a device's battery percentage. Some malicious actors haved used it to <a href="https://www.theguardian.com/technology/2016/aug/02/battery-status-indicators-tracking-online">track your online activity</a>. This is a deprecated feature that has been removed from most browsers due to security concerns.</p>
+                            <p>Your screen resolution can be used by threat actors to discover what type of device you're using. For example, if an outdated resolution is found (like 800 x 600 or 1024 x 768), malware can see you're using <a href="https://www.makeuseof.com/tag/malware-uses-screen-resolution-avoid-detection/">an outdated version of Windows or a virtual machine</a>.</p>
                             <h5>Mitigation techniques</h5>
                             <p>User agent information can be hidden by browser extensions such as <a href="https://www.google.com/search?q=noscript">NoScript</a>.</p>
                         </div>
@@ -77,6 +66,7 @@
                             <h5>How is this possible?</h5>
                             <p>Cloudflare can be used to get a user's public IP address. Your public IP address is provided by your router/internet service provider and connects everyone in your local area network (household or office) to the internet. It may look something like this: <code>92.123.50.225</code>. A private IP address is used for communications between devices within your own network. It is not recognized on the internet and looks something like this: <code>192.168.1.240</code>.</p>
                             <p>There are browser methods such as <code>navigator.connection</code> that gives websites access to this information.</p>
+                            <p>All of your online activity can be traced back to your IP address (even in private browsing, or when you delete your history). Attackers can also use reconnaissance techniques to learn more about your network (vulnerabilities, misconfigurations, nearby WiFi networks, etc.) and stage attacks for it.</p>
                             <h5>Mitigation techniques</h5>
                             <p>Use a VPN service. VPNs allow users to use unsecured public networks like a secure private network by encrypting all data between the remote and client device.</p>
                             <p>Use the <a href="https://www.google.com/search?q=tor%20project">Tor browser</a>. This browser allows internet users to browse anonymously online and keep their activities hidden from websites, ISPs, and advertisers.</p>
@@ -112,9 +102,13 @@
                     <div class="card bg-light text-black">
                         <div class="card-body">
                             <h5>How is this possible?</h5>
-                            <p>Accelerometers are used to see how fast your device is moving. One use case of this is to power off the device when it falls to prevent data loss.</p>
+                            <p>Your location and device orientation info are usually used by mapping services to find out where you are. For example, when ordering food a website may ask for your location</p>
+                            <p>Aceelerometers and gyroscopes check the velocity and position of your device in 3 directions. This is usually used to shut down your device when it falls to prevent data loss. These features are also used in mobile games and 360&deg; experiences that use motion controls.</p>
+                            <p>These features can be used by malicious actors to discover your location.</p>
                             <h5>Mitigation techniques</h5>
-                            <p></p>
+                            <p>Turn off your location on your device when you don't need it. Some programs will track your location at all times when it is turned on (like on your <a href="https://www.google.com/maps/timeline">Google Timeline</a>).</p>
+                            <p>Do not accept permissions from websites that want to use your location when it is not necessary.</p>
+                            <p>Threat actors can still triangulate your location via other techniques such as scanning nearby WiFi networks or discovering what cell networks your device are connecting to.</p>
                         </div>
                     </div>
                 </div>
