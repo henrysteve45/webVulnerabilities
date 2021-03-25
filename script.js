@@ -96,6 +96,34 @@
     }
     $("#gpu").append(getVideoCardInfo().renderer);
     $("#screenRes").append(screen.width + " x " + screen.height);
+/*Canvas*/
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+ctx.font = "32px Arial";
+ctx.fillStyle = "green";
+ctx.textAlign = "center";
+ctx.fillText("Canvas text", canvas.width/2, canvas.height/2);
+ctx.fillStyle = "red";
+ctx.fillText("Canvas text", canvas.width/2.5, canvas.height/2.5);
+ctx.fillStyle = "blue";
+ctx.fillText("Canvas text", canvas.width/1.7, canvas.height/1.7);
+
+var canvas = document.getElementById('myCanvas');
+var dataURL = canvas.toDataURL();
+
+function stringToHash(string) {             
+    var hash = 0;
+    if (string.length == 0) return hash;
+    for (i = 0; i < string.length; i++) {
+        char = string.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash |= 0; //convert to 32bit int
+    }
+    return Math.abs(hash);
+}
+
+hashVal = stringToHash(dataURL);
+ $("#canvas").append("<p>Simple canvas data hash value (collisions may be possible): "+ hashVal +"</p>");
 
 /*Battery info*/
     try {
@@ -120,7 +148,7 @@
     })
 } catch (error) {
     console.error(error);
-    $("#battery").append("<p class='text-warning'>You are not using a battery or your browser does not support this feature.</p>");
+    $("#battery").append("<p class='text-danger'>You are not using a battery or your browser does not support this feature.</p>");
 }
 
 /*IP address*/

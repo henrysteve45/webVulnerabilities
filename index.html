@@ -9,6 +9,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <style>
+            canvas {
+                border: 2px solid black;
+            }
+        </style>
     </head>
     <body>
         <div id="test2"></div>
@@ -35,6 +40,12 @@
                     <div class="ml-4">
                         <p id="cpu"><b>CPU info: </b></p>
                         <p id="gpu"><b>GPU info/WebGL renderer: </b></p>
+                        <p><b>Canvas fingerprint:</b></p>
+                        <div id="canvas">
+                            <canvas id="myCanvas" width="256" height="224">
+                                <p class='text-danger'>This browser does not support canvas elements.</p>
+                            </canvas>
+                        </div>
                         <p id="battery"><b>Battery info: </b><br></p>
                         <p id="screenRes"><b>Screen resolution: </b></p>
                     </div>
@@ -44,6 +55,8 @@
                             <p>Developers can use the <code>navigator.userAgent</code> JavaScript property to list information about the user's browser, OS, etc.</p>
                             <p>Duck typing is a technique used to identify user information based on the duck test (if it walks, looks, and sounds like a duck... then it IS a duck). Users can spoof their user agent to hide their identity. However, duck typing combats this by identifing browsers based on known quirks they have.</p>
                             <p>Cookies a small pieces of information that your browser stores locally on your device. They contain personal configurations such as whether you're using dark or light mode. When you visit the site again, these cookies are read to reintergrate those settings into the site. Unfortunately, many sites abuse cookies to <a href="https://privacy.net/stop-cookies-tracking/">spy on users web activity</a>. You can enable the "Send Do Not Track Request" feature in your browser, but many websites will simply ignore this because it imposes no technical limitations or authority.</p>
+                            <p>Canvas elements are used to draw items on a webpage. This feature has been abused to create fingerprints of users. Threat actors will call the canvas API to draw text on screen, save it as an image, and create a hash of the image. Hash algorithms create unique but irreversable text representations of data. Due to the differences in which browsers and processors draw graphics, this can be used to identify graphics hardware on your machine.</p>
+                            
                             <p>The <code>navigator.getBattery()</code> property can be used to view a device's battery percentage. Some malicious actors haved used it to <a href="https://www.theguardian.com/technology/2016/aug/02/battery-status-indicators-tracking-online">track your online activity</a>. This is a deprecated feature that has been removed from most browsers due to security concerns.</p>
                             <p>Your screen resolution can be used by threat actors to discover what type of device you're using. For example, if an outdated resolution is found (like 800 x 600 or 1024 x 768), malware can see you're using <a href="https://www.makeuseof.com/tag/malware-uses-screen-resolution-avoid-detection/">an outdated version of Windows or a virtual machine</a>.</p>
                             <h5>Mitigation techniques</h5>
